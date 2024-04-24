@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import { setAttributes } from './helpers';
 
 	export let selectionId: string = '';
@@ -10,6 +11,7 @@
 	};
 
 	const elements: Record<string, any> = {};
+	const dispatch = createEventDispatcher();
 
 	onMount(async () => {
 		const [CropperElement, CropperViewer] = (
@@ -22,6 +24,8 @@
 		setAttributes(elements.viewer, viewerAttributes);
 		elements.viewer.setAttribute('selection', `#${selectionId}`);
 		elements.viewerContainer.appendChild(elements.viewer);
+		await new Promise((resolve) => setTimeout(resolve));
+		dispatch('ready');
 	});
 </script>
 

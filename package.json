@@ -1,6 +1,6 @@
 {
   "name": "svelte-cropperjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A svelte wrapper for cropper.js",
   "author": "Emilio Figueroa Torres",
   "license": "MIT",

@@ -1,3 +1,5 @@
+<svelte:options accessors />
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
@@ -72,7 +74,7 @@
 	};
 
 	export const canvasActions = {
-		toCanvas(opts: any) {
+		toCanvas(opts?: any) {
 			return elements.canvas.$toCanvas(opts);
 		}
 	};
@@ -121,8 +123,8 @@
 		render() {
 			return elements.selection.$render();
 		},
-		toCanvas() {
-			return elements.selection.$toCanvas();
+		toCanvas(opts?: any) {
+			return elements.selection.$toCanvas(opts);
 		}
 	};
 
@@ -269,6 +271,8 @@
 			elements[key].setAttribute('action', action);
 			elements.selection.appendChild(elements[key]);
 		}
+		await new Promise((resolve) => setTimeout(resolve));
+		dispatch('ready');
 	});
 
 	function dispatchEvent(type: string) {
@@ -284,3 +288,9 @@
 </script>
 
 <div bind:this={elements.container} class="cropper-container {containerClass}"></div>
+
+<style global>
+	.cropper-container cropper-canvas {
+		height: 100%;
+	}
+</style>
