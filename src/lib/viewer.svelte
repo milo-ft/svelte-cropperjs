@@ -17,6 +17,7 @@
 		const [CropperElement, CropperViewer] = (
 			await Promise.all([import('@cropper/element'), import('@cropper/element-viewer')])
 		).map((module) => module.default);
+		await new Promise((resolve) => setTimeout(resolve));
 		CropperElement.$define();
 		CropperViewer.$define();
 
